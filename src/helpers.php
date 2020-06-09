@@ -1,36 +1,64 @@
 <?php
 
-if (! function_exists('get_cache')) {
-    function get_cache($key, $callable, $beta = 1.0)
+if (! function_exists('log')) {
+    function log($level, $message, array $context = [])
     {
-        return app('cache')->get($key, $callable, $beta);
+        return app('log')->log($level, $message, $context);
     }
 }
 
-if (! function_exists('delete_cache')) {
-    function delete_cache($key)
+if (! function_exists('log_debug')) {
+    function log_debug($message, array $context = [])
     {
-        return app('cache')->delete($key);        
+        return app('log')->debug($message, $context);
     }
 }
 
-if (! function_exists('get_cache_item')) {
-    function get_cache_item($key)
+if (! function_exists('log_info')) {
+    function log_info($message, array $context = [])
     {
-        return app('cache')->getItem($key);        
+        return app('log')->info($message, $context);
     }
 }
 
-if (! function_exists('save_cache_item')) {
-    function save_cache_item($item)
+if (! function_exists('log_notice')) {
+    function log_notice($message, array $context = [])
     {
-        return app('cache')->save($item);        
+        return app('log')->notice($message, $context);
     }
 }
 
-if (! function_exists('delete_cache_item')) {
-    function delete_cache_item($key)
+if (! function_exists('log_warning')) {
+    function log_warning($message, array $context = [])
     {
-        return app('cache')->deleteItem($key);        
+        return app('log')->warning($message, $context);
+    }
+}
+
+if (! function_exists('log_error')) {
+    function log_error($message, array $context = [])
+    {
+        return app('log')->error($message, $context);
+    }
+}
+
+if (! function_exists('log_critical')) {
+    function log_critical($message, array $context = [])
+    {
+        return app('log')->critical($message, $context);
+    }
+}
+
+if (! function_exists('log_alert')) {
+    function log_alert($message, array $context = [])
+    {
+        return app('log')->alert($message, $context);
+    }
+}
+
+if (! function_exists('log_emergency')) {
+    function log_emergency($message, array $context = [])
+    {
+        return app('log')->emergency($message, $context);
     }
 }

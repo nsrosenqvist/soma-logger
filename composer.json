@@ -1,12 +1,12 @@
 {
-    "name": "nsrosenqvist/soma-cache",
+    "name": "nsrosenqvist/soma-logger",
     "type": "library",
     "license": "MIT",
-    "description": "The Symfony Cache module for the Soma framework",
-    "homepage": "https://github.com/nsrosenqvist/soma-cache",
+    "description": "Monolog integrated with the SOMA framework",
+    "homepage": "https://github.com/nsrosenqvist/soma-logger",
     "autoload": {
         "psr-4": {
-            "NSRosenqvist\\Soma\\Cache\\": "src/"
+            "NSRosenqvist\\Soma\\Logger\\": "src/"
         },
         "files": [
             "src/helpers.php"
@@ -14,6 +14,7 @@
     },
     "require": {
         "php": ">=7.0.0",
-        "symfony/cache": "^4.4"
+        "monolog/monolog": "^2.0",
+        "illuminate/support": "^7.0"
     }
 }

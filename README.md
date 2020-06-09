@@ -1,28 +1,25 @@
-# SOMA Cache
+# SOMA Logger
 
 ## Installation
 
 ```sh
-composer require nsrosenqvist/soma-cache
+composer require nsrosenqvist/soma-logger
 ```
 
 ## Usage
 
+First register the service provider. By default configuration goes in `config/app.php`. If you want anything other than simple file logging you need to connect a Monolog handler to the SOMA exception handler (view source of `LoggerProvider.php`) or disable the built-in exception handler by setting the config value `app.catch-exceptions` to `false`.
+
 **Example configuration:**
 ```php
 <?php return [
-    'default' => 'files',
-
-    'stores' => [
-        'files' => [
-            'driver' => 'filesystem',
-            'directory' => get_path('cache').'/files',
-        ],
+    'log' => [
+        'debug' => storage_path('logs/debug.log'),
+        'info' => storage_path('logs/info.log'),
+        'error' => storage_path('logs/error.log')
     ],
 ];
 ```
-
-To see how to configure all supported [cache adapters](https://symfony.com/doc/4.4/components/cache.html#available-cache-adapters) review [how the configuration is processed](https://github.com/nsrosenqvist/soma-cache/blob/master/src/CacheProvider.php) in `CacheProvider::resolveAdapter`.
 
 ## License
 

@@ -1,26 +1,29 @@
-<?php namespace NSRosenqvist\Soma\Cache;
+<?php
+
+namespace NSRosenqvist\Soma\Logger;
 
 use Exception;
-use Symfony\Component\Cache\Adapter\AdapterInterface;
+use Monolog\Logger;
+use Illuminate\Support\Arr;
 
-class CacheManager
+class LogManager
 {
-    protected $drivers = [];
+    protected $channels = [];
     protected $default = '';
 
     public function use($name)
     {
-        if (! isset($this->drivers[$name])) {
-            throw new Exception("Cache driver hasn't been configured: ".$name);
+        if (! isset($this->channels[$name])) {
+            throw new Exception("Log channel hasn't been configured: ".$name);
         }
 
-        return $this->drivers[$name];
+        return $this->channels[$name];
     }
 
     public function setDefault($name)
     {
-        if (! isset($this->drivers[$name])) {
-            throw new Exception("Default cache driver hasn't been configured: ".$name);
+        if (! isset($this->channels[$name])) {
+            throw new Exception("Default log channel hasn't been configured: ".$name);
         }
 
         $this->default = $name;
@@ -33,13 +36,14 @@ class CacheManager
         if ($this->default) {
             return $this->use($this->default);
         } else {
-            return $this->use(array_first($this->drivers));
+            return $this->use(Arr::first($this->channels));
         }
     }
 
-    public function register($name, AdapterInterface $cache, $default = false)
+    public function register(Logger $logger, $default = false)
     {
-        $this->drivers[$name] = $cache;
+        $name = $logger->getName();
+        $this->channels[$logger->getName()] = $logger;
 
         if ($default) {
             $this->setDefault($name);
